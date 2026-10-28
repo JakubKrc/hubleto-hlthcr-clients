@@ -11,7 +11,8 @@
         "Client type": "Typ klienta",
         "Number of employees": "Počet zamestnancov",
         "Audit interval": "Interval auditov",
-        "months": "mesiacov"
+        "months": "mesiacov",
+        "Empty: the default of {{ months }} months.": "Prázdne: predvolených {{ months }} mesiacov."
     },
     "Controllers\\Home": {
         "Clients": "Klienti",

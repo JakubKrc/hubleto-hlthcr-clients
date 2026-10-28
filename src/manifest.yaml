@@ -10,4 +10,5 @@ author:
 highlight: Extends Customers with the occupational-health client data both legacy apps keep (client type, employees, audit interval) and exports contact e-mails.
 requires:
   - Hubleto\App\Community\Customers
+  - Hubleto\App\Community\Contacts
   - Hubleto\App\External\WaiBlue\HlthcrCore

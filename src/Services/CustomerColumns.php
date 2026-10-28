@@ -52,6 +52,9 @@ class CustomerColumns extends \Hubleto\Erp\Core
         'title' => $this->translate('Audit interval'),
         'unit' => $this->translate('months'),
         'defaultValue' => $this->getDefaultAuditIntervalMonths(),
+        // Column::fromArray() checks "description" but reads "hint".
+        'description' => $this->getAuditIntervalHint(),
+        'hint' => $this->getAuditIntervalHint(),
       ],
     ];
   }
@@ -65,6 +68,12 @@ class CustomerColumns extends \Hubleto\Erp\Core
     }
     if ($configuredMonths > 0) return $configuredMonths;
     return self::DEFAULT_AUDIT_INTERVAL_MONTHS;
+  }
+
+  // An empty interval is stored as 0, and then the default applies (Audit::getAuditIntervalMonths).
+  private function getAuditIntervalHint(): string
+  {
+    return $this->translate('Empty: the default of {{ months }} months.', ['months' => $this->getDefaultAuditIntervalMonths()]);
   }
 
   /**
