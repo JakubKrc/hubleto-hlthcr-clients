@@ -25,10 +25,11 @@ class CustomerRecordManager extends \Hubleto\App\Community\Customers\Models\Reco
     return $this->restrictToVisibleCustomers($query);
   }
 
+  // Also builds the text of linked clients, so the owner of a branch sees the name of its client.
   public function prepareLookupQuery(string $search): mixed
   {
     $query = parent::prepareLookupQuery($search);
-    return $this->restrictToVisibleCustomers($query);
+    return $this->accessScope()->restrictToLinkableCustomers($query, $this->table . '.id');
   }
 
   // Dropdowns offer active clients only, as in both legacy apps.
