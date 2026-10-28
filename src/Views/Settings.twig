@@ -1,0 +1,31 @@
+<div class="flex items-center">
+  <h1 class="app-main-title">{{ translate('Clients') }} > {{ translate('Settings') }}</h1>
+  {% if viewParams.settingsSaved %}
+    <div class="badge badge-info text-sm ml-4">{{ translate('Settings saved.') }}</div>
+  {% endif %}
+</div>
+
+<div class="card mt-10 w-1/2 m-auto">
+  <form id="settings-form" action="" method="POST">
+    <input type="hidden" name="settingsChanged" value="1">
+    <table class="table-default">
+      <tbody>
+        <tr>
+          <td>{{ translate('Audit interval of new clients (months)') }}</td>
+          <td><input type="number" min="1" name="defaultAuditIntervalMonths" class="hubleto component input" value="{{ viewParams.defaultAuditIntervalMonths }}" /></td>
+        </tr>
+        <tr>
+          <td>{{ translate('Client types') }}</td>
+          <td><a href="{{ config.projectUrl }}/hlthcr-clients/client-types" class="btn btn-transparent"><span class="text">{{ translate('Edit client types') }}</span></a></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="mt-2 text-right">
+      {% if viewParams.maySaveSettings %}
+        <button type="submit" class="btn btn-primary"><span class="text">{{ translate('Save') }}</span></button>
+      {% else %}
+        <span class="text-sm">{{ translate('Only administrators and managers change the settings.') }}</span>
+      {% endif %}
+    </div>
+  </form>
+</div>

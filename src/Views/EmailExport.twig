@@ -1,0 +1,21 @@
+<div class="card m-2">
+  <div class="card-header">
+    <h1 class="app-main-title">{{ translate('Export of e-mail addresses') }}</h1>
+  </div>
+  <div class="card-body">
+    <form method="get" action="{{ config.projectUrl }}/hlthcr-clients/api/download-email-export" class="flex gap-2 items-end">
+      <div class="flex flex-col gap-1">
+        <label for="email-export-option">{{ translate('Recipients') }}</label>
+        <select id="email-export-option" name="option">
+          {% for value, label in viewParams.options %}
+            <option value="{{ value }}">{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">
+        <span class="icon"><i class="fas fa-download"></i></span>
+        <span class="text">{{ translate('Export e-mail addresses') }}</span>
+      </button>
+    </form>
+  </div>
+</div>

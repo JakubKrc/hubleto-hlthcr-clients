@@ -1,0 +1,14 @@
+{
+    "name": "wai-blue/hubleto-hlthcr-clients",
+    "license": "MIT",
+    "description": "Hlthcr for Hubleto: Clients (employers) of an occupational health service on Hubleto Customers: client types, audit interval, e-mail export",
+    "require": {
+        "wai-blue/hubleto-hlthcr-core": "dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hubleto\\App\\External\\WaiBlue\\HlthcrClients\\": "src"
+        }
+    },
+    "minimum-stability": "dev"
+}

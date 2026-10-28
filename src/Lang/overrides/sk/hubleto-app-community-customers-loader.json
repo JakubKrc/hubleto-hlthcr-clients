@@ -1,0 +1,50 @@
+{
+    "Models\\Customer": {
+        "Owner": "Hygienik",
+        "Company ID": "IČO",
+        "The number of employees and the audit interval cannot be negative.": "Počet zamestnancov a interval auditov nemôžu byť záporné.",
+        "Customers": "Klienti",
+        "Add Customer": "Pridať klienta",
+        "Customer": "Klient"
+    },
+    "manifest": {
+        "Customers": "Klienti"
+    },
+    "Controllers\\Customers": {
+        "Customers": "Klienti"
+    },
+    "Models\\CustomerActivity": {
+        "Customer": "Klient"
+    },
+    "Models\\CustomerDocument": {
+        "Customer": "Klient"
+    },
+    "Models\\CustomerTag": {
+        "Customer": "Klient",
+        "Add Customer": "Pridať klienta"
+    },
+    "Components\\FormCustomer": {
+        "Customer": "Klient"
+    },
+    "Components\\FormActivity": {
+        "Customer": "Klient"
+    },
+    "Components\\CustomerFormActivity": {
+        "Customer": "Klient"
+    },
+    "Controllers\\Activity": {
+        "Customers": "Klienti"
+    },
+    "Controllers\\Tags": {
+        "Customers": "Klienti"
+    },
+    "Controllers\\Settings": {
+        "Customers": "Klienti"
+    },
+    "Controllers\\Dashboard": {
+        "Customers": "Klienti"
+    },
+    "Calendar": {
+        "Customers": "Klienti"
+    }
+}

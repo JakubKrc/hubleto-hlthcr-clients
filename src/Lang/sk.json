@@ -1,0 +1,51 @@
+{
+    "manifest": {
+        "Extends Customers with the occupational-health client data both legacy apps keep (client type, employees, audit interval) and exports contact e-mails.": "Dopĺňa klientov o údaje pracovnej zdravotnej služby, ktoré majú obe pôvodné aplikácie (typ klienta, počet zamestnancov, interval auditov), a exportuje kontaktné e-maily.",
+        "Client types": "Typy klientov",
+        "Export of e-mail addresses": "Export e-mailových adries",
+        "Settings": "Nastavenia",
+        "E-mail export": "Export e-mailov",
+        "Clients": "Klienti"
+    },
+    "Services\\CustomerColumns": {
+        "Client type": "Typ klienta",
+        "Number of employees": "Počet zamestnancov",
+        "Audit interval": "Interval auditov",
+        "months": "mesiacov"
+    },
+    "Controllers\\Home": {
+        "Clients": "Klienti",
+        "Client types": "Typy klientov",
+        "Export of e-mail addresses": "Export e-mailových adries",
+        "Settings": "Nastavenia"
+    },
+    "Loader": {
+        "Occupational health": "Pracovná zdravotná služba"
+    },
+    "Models\\ClientType": {
+        "Name": "Názov",
+        "Add client type": "Pridať typ klienta"
+    },
+    "Controllers\\Settings": {
+        "Clients": "Klienti",
+        "Settings": "Nastavenia",
+        "Settings saved.": "Nastavenia boli uložené.",
+        "Audit interval of new clients (months)": "Interval auditov nových klientov (mesiace)",
+        "Client types": "Typy klientov",
+        "Edit client types": "Upraviť typy klientov",
+        "Save": "Uložiť",
+        "Only administrators and managers change the settings.": "Nastavenia menia iba administrátori a manažéri."
+    },
+    "Components\\FormClientType": {
+        "Client type": "Typ klienta"
+    },
+    "Controllers\\EmailExport": {
+        "Export of e-mail addresses": "Export e-mailových adries",
+        "Recipients": "Príjemcovia",
+        "Export e-mail addresses": "Exportovať e-mailové adresy"
+    },
+    "Services\\EmailExport": {
+        "All users": "Všetci používatelia",
+        "Client contact persons": "Kontaktné osoby klientov"
+    }
+}
