@@ -46,6 +46,7 @@ class Loader extends \Hubleto\App\External\WaiBlue\HlthcrCore\HlthcrApp
     $customerColumns = $this->getService(Services\CustomerColumns::class);
     $customerColumns->registerInCustomerModel();
     $customerColumns->hideManagerInCustomerModel();
+    $customerColumns->offerOnlyHygienistsAsOwner();
   }
 
   public function installApp(int $round): void
@@ -130,7 +131,7 @@ class Loader extends \Hubleto\App\External\WaiBlue\HlthcrCore\HlthcrApp
       // Set directly: during "php hubleto init" the Customer model is loaded before this app adds its columns,
       // so recordCreate() would skip them.
       $mCustomer->record->where('id', $createdCustomer['id'])->update([
-        'hlthcr_client_type' => $clientTypeIdsByName[$demoClient['client_type']] ?? null,
+        'id_hlthcr_client_type' => $clientTypeIdsByName[$demoClient['client_type']] ?? null,
         'hlthcr_employee_count' => $demoClient['employee_count'],
         'hlthcr_audit_interval_months' => $defaultAuditIntervalMonths,
       ]);

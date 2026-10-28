@@ -3,6 +3,8 @@
 namespace Hubleto\App\External\WaiBlue\HlthcrClients\Services;
 
 use Hubleto\App\Community\Customers\Models\Customer;
+use Hubleto\App\External\WaiBlue\HlthcrCore\Controllers\Api\UserLookup;
+use Hubleto\App\External\WaiBlue\HlthcrCore\Services\Roles;
 
 /**
  * Extra columns on the community "customers" table: the client data both legacy apps keep.
@@ -22,7 +24,7 @@ class CustomerColumns extends \Hubleto\Erp\Core
   public function getSqlTypes(): array
   {
     return [
-      'hlthcr_client_type' => 'int(8) NULL DEFAULT NULL',
+      'id_hlthcr_client_type' => 'int(8) NULL DEFAULT NULL',
       'hlthcr_employee_count' => 'int(8) NULL DEFAULT NULL',
       'hlthcr_audit_interval_months' => 'int(8) NULL DEFAULT NULL',
     ];
@@ -30,19 +32,16 @@ class CustomerColumns extends \Hubleto\Erp\Core
 
   /**
    * Column name => Hubleto column definition (format of Column::fromArray()).
-   * The client types come from their code list; a lookup column would need a relation inside the Customer model.
+   * The client type is a lookup into its code list; its foreign key is added by the ClientType migrations.
    */
   public function getColumnDefinitions(): array
   {
-    /** @var \Hubleto\App\External\WaiBlue\HlthcrClients\Models\ClientType */
-    $mClientType = $this->getModel(\Hubleto\App\External\WaiBlue\HlthcrClients\Models\ClientType::class);
-
     return [
-      'hlthcr_client_type' => [
-        'class' => 'Integer',
+      'id_hlthcr_client_type' => [
+        'class' => 'Lookup',
         'title' => $this->translate('Client type'),
         'required' => true,
-        'enumValues' => $mClientType->getNamesById(),
+        'lookupModel' => \Hubleto\App\External\WaiBlue\HlthcrClients\Models\ClientType::class,
       ],
       'hlthcr_employee_count' => [
         'class' => 'Integer',
@@ -87,6 +86,15 @@ class CustomerColumns extends \Hubleto\Erp\Core
       ->setRequired(false)
       ->setDefaultHidden()
       ->setReactComponent('HlthcrCoreNoInput')
+    ;
+  }
+
+  // The client's hygienist (Hubleto's owner) is chosen from hygienists only, as in one legacy app.
+  public function offerOnlyHygienistsAsOwner(): void
+  {
+    $this->getModel(Customer::class)->getColumn('id_owner')
+      ->setReactComponent('')
+      ->setEndpoint(UserLookup::endpointFor(Roles::HYGIENIST, 'id_owner'))
     ;
   }
 
