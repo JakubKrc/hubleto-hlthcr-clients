@@ -37,7 +37,7 @@ class Customer extends CommunityCustomer
   }
 
   // Counts and intervals of the occupational health columns cannot be negative.
-  const NOT_NEGATIVE_COLUMNS = ['hlthcr_employee_count', 'hlthcr_audit_interval_months'];
+  const NOT_NEGATIVE_COLUMNS = ['hlthcr_employee_count', 'hlthcr_employee_count_at_risk', 'hlthcr_audit_interval_months'];
 
   public function onBeforeCreate(array $record): array
   {
@@ -59,7 +59,7 @@ class Customer extends CommunityCustomer
       $value = $record[$column] ?? null;
       $isNegative = is_numeric($value) && (int) $value < 0;
       if ($isNegative) {
-        throw new \Hubleto\Framework\Exceptions\RecordSaveException($this->translate('The number of employees and the audit interval cannot be negative.'));
+        throw new \Hubleto\Framework\Exceptions\RecordSaveException($this->translate('The numbers of employees and the audit interval cannot be negative.'));
       }
     }
   }

@@ -26,6 +26,7 @@ class CustomerColumns extends \Hubleto\Erp\Core
     return [
       'id_hlthcr_client_type' => 'int(8) NULL DEFAULT NULL',
       'hlthcr_employee_count' => 'int(8) NULL DEFAULT NULL',
+      'hlthcr_employee_count_at_risk' => 'int(8) NULL DEFAULT NULL',
       'hlthcr_audit_interval_months' => 'int(8) NULL DEFAULT NULL',
     ];
   }
@@ -46,6 +47,11 @@ class CustomerColumns extends \Hubleto\Erp\Core
       'hlthcr_employee_count' => [
         'class' => 'Integer',
         'title' => $this->translate('Number of employees'),
+      ],
+      // Typed by the user in both legacy apps (one of them per work category).
+      'hlthcr_employee_count_at_risk' => [
+        'class' => 'Integer',
+        'title' => $this->translate('Number of employees at risk'),
       ],
       'hlthcr_audit_interval_months' => [
         'class' => 'Integer',

@@ -12,7 +12,8 @@
         "Number of employees": "Počet zamestnancov",
         "Audit interval": "Interval auditov",
         "months": "mesiacov",
-        "Empty: the default of {{ months }} months.": "Prázdne: predvolených {{ months }} mesiacov."
+        "Empty: the default of {{ months }} months.": "Prázdne: predvolených {{ months }} mesiacov.",
+        "Number of employees at risk": "Počet zamestnancov v riziku"
     },
     "Controllers\\Home": {
         "Clients": "Klienti",

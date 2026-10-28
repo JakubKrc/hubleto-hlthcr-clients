@@ -5,7 +5,7 @@ namespace Hubleto\App\External\WaiBlue\HlthcrClients\HubletoOverrides;
 use Hubleto\App\External\WaiBlue\HlthcrCore\Services\AccessScope;
 
 /**
- * Contact persons of the clients the user may see, also in dropdowns.
+ * Contact persons of the clients the user may see, also in dropdowns. Medical staff see none (both legacy apps).
  */
 class ContactRecordManager extends \Hubleto\App\Community\Contacts\Models\RecordManagers\Contact
 {
@@ -26,6 +26,8 @@ class ContactRecordManager extends \Hubleto\App\Community\Contacts\Models\Record
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
     /** @var AccessScope */
     $accessScope = $hubleto->getService(AccessScope::class);
+    // Medical staff have no work records and no contact persons.
+    $query = $accessScope->restrictToWorkRecordReaders($query);
     return $accessScope->restrictToVisibleCustomers($query, $this->table . '.id_customer');
   }
 }
