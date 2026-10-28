@@ -93,7 +93,7 @@ class Loader extends \Hubleto\App\External\WaiBlue\HlthcrCore\HlthcrApp
     return 0;
   }
 
-  public function generateDemoData(): void
+  public function generateHlthcrDemoData(): void
   {
     /** @var Customer */
     $mCustomer = $this->getModel(Customer::class);
@@ -125,6 +125,11 @@ class Loader extends \Hubleto\App\External\WaiBlue\HlthcrCore\HlthcrApp
         'id_manager' => $demoClient['id_hygienist'],
         'is_active' => true,
         'date_created' => date('Y-m-d'),
+      ]);
+
+      // Set directly: during "php hubleto init" the Customer model is loaded before this app adds its columns,
+      // so recordCreate() would skip them.
+      $mCustomer->record->where('id', $createdCustomer['id'])->update([
         'hlthcr_client_type' => $clientTypeIdsByName[$demoClient['client_type']] ?? null,
         'hlthcr_employee_count' => $demoClient['employee_count'],
         'hlthcr_audit_interval_months' => $defaultAuditIntervalMonths,
