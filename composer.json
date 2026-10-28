@@ -1,6 +1,6 @@
 {
     "name": "wai-blue/hubleto-hlthcr-clients",
-    "license": "MIT",
+    "license": "proprietary",
     "description": "Hlthcr for Hubleto: Clients (employers) of an occupational health service on Hubleto Customers: client types, audit interval, e-mail export",
     "require": {
         "wai-blue/hubleto-hlthcr-core": "dev-main"
