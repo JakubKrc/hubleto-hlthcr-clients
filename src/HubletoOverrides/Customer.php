@@ -16,6 +16,12 @@ class Customer extends CommunityCustomer
 
   public string $recordManagerClass = CustomerRecordManager::class;
 
+  // Hubleto's dropdown text prefers the identifier, which Hlthcr does not offer: the client's name instead.
+  public ?string $lookupSqlValue = '{%TABLE%}.name';
+
+  // Hubleto fields that neither legacy app has: not offered in the form or the list (the columns stay).
+  const COLUMNS_IN_NEITHER_LEGACY_APP = ['identifier', 'region', 'id_country', 'shared_with', 'shared_folder'];
+
   public static function register(): void
   {
     \Hubleto\Framework\DependencyInjection::setServiceProvider(CommunityCustomer::class, self::class);
@@ -79,6 +85,11 @@ class Customer extends CommunityCustomer
       ;
     }
 
+    // The client list of both legacy apps shows the street, not the notes or the audit interval.
+    if (isset($columns['street_line_1'])) $columns['street_line_1']->setDefaultVisible();
+    if (isset($columns['note'])) $columns['note']->setDefaultHidden();
+    if (isset($columns['hlthcr_audit_interval_months'])) $columns['hlthcr_audit_interval_months']->setDefaultHidden();
+
     return $columns;
   }
 
@@ -86,12 +97,17 @@ class Customer extends CommunityCustomer
   public function describeForm(): \Hubleto\Framework\Description\Form
   {
     $description = parent::describeForm();
+    // Without its description, Hubleto's form shows nothing for an input.
+    foreach (self::COLUMNS_IN_NEITHER_LEGACY_APP as $columnName) {
+      unset($description->inputs[$columnName]);
+    }
     return $this->offerOnlyAllowedChanges($description);
   }
 
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
+    $description->hideColumns(array_merge(self::COLUMNS_IN_NEITHER_LEGACY_APP, ['virt_tags']));
     return $this->offerOnlyAllowedChanges($description);
   }
 }
