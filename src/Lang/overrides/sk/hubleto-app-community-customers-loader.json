@@ -2,7 +2,7 @@
     "Models\\Customer": {
         "Owner": "Hygienik",
         "Company ID": "IČO",
-        "The number of employees and the audit interval cannot be negative.": "Počet zamestnancov a interval auditov nemôžu byť záporné.",
+        "The numbers of employees and the audit interval cannot be negative.": "Počty zamestnancov a interval auditov nemôžu byť záporné.",
         "Customers": "Klienti",
         "Add Customer": "Pridať klienta",
         "Customer": "Klient"
