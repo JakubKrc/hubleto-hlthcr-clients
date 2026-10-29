@@ -9,7 +9,7 @@ class Settings extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      ['url' => 'hlthcr-clients', 'content' => $this->translate('Clients')],
+      ['url' => 'hlthcr-clients', 'content' => $this->translate('Client data')],
       ['url' => 'settings', 'content' => $this->translate('Settings')],
     ]);
   }

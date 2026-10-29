@@ -2,7 +2,7 @@ namespace: Hubleto\App\External\WaiBlue\HlthcrClients
 appType: external
 sidebarGroup: custom
 rootUrlSlug: hlthcr-clients
-name: E-mail export
+name: Client data
 icon: fas fa-at
 author:
   name: "Hlthcr"

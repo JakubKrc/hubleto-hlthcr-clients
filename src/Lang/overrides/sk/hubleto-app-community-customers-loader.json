@@ -26,14 +26,8 @@
     "Components\\FormCustomer": {
         "Customer": "Klient"
     },
-    "Components\\FormActivity": {
-        "Customer": "Klient"
-    },
     "Components\\CustomerFormActivity": {
         "Customer": "Klient"
-    },
-    "Controllers\\Activity": {
-        "Customers": "Klienti"
     },
     "Controllers\\Tags": {
         "Customers": "Klienti"

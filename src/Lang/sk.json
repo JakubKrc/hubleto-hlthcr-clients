@@ -4,8 +4,8 @@
         "Client types": "Typy klientov",
         "Export of e-mail addresses": "Export e-mailových adries",
         "Settings": "Nastavenia",
-        "E-mail export": "Export e-mailov",
-        "Clients": "Klienti"
+        "Clients": "Klienti",
+        "Client data": "Údaje klientov"
     },
     "Services\\CustomerColumns": {
         "Client type": "Typ klienta",
@@ -19,7 +19,8 @@
         "Clients": "Klienti",
         "Client types": "Typy klientov",
         "Export of e-mail addresses": "Export e-mailových adries",
-        "Settings": "Nastavenia"
+        "Settings": "Nastavenia",
+        "Client data": "Údaje klientov"
     },
     "Loader": {
         "Occupational health": "Pracovná zdravotná služba"
@@ -29,14 +30,14 @@
         "Add client type": "Pridať typ klienta"
     },
     "Controllers\\Settings": {
-        "Clients": "Klienti",
         "Settings": "Nastavenia",
         "Settings saved.": "Nastavenia boli uložené.",
         "Audit interval of new clients (months)": "Interval auditov nových klientov (mesiace)",
         "Client types": "Typy klientov",
         "Edit client types": "Upraviť typy klientov",
         "Save": "Uložiť",
-        "Only administrators and managers change the settings.": "Nastavenia menia iba administrátori a manažéri."
+        "Only administrators and managers change the settings.": "Nastavenia menia iba administrátori a manažéri.",
+        "Client data": "Údaje klientov"
     },
     "Components\\FormClientType": {
         "Client type": "Typ klienta"

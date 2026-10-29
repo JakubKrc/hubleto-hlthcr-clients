@@ -1,10 +1,4 @@
 {
-    "Components\\FormPerson": {
-        "Customer": "Klient"
-    },
-    "Models\\Person": {
-        "Customer": "Klient"
-    },
     "Models\\Contact": {
         "Customer": "Klient"
     },
