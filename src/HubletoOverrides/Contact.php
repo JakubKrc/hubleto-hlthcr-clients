@@ -10,6 +10,7 @@ use Hubleto\App\Community\Contacts\Models\Contact as CommunityContact;
  */
 class Contact extends CommunityContact
 {
+  use \Hubleto\App\External\WaiBlue\HlthcrCore\Models\Traits\BehavesAsCommunityModel;
   use \Hubleto\App\External\WaiBlue\HlthcrCore\Models\Traits\OffersOnlyAllowedChanges;
 
   public string $recordManagerClass = ContactRecordManager::class;
@@ -23,14 +24,7 @@ class Contact extends CommunityContact
   {
     parent::__construct();
 
-    // Behave as the community model everywhere else: same migrations, config keys and translations.
-    $communityModel = new \ReflectionClass(CommunityContact::class);
-    $this->fullName = $communityModel->getName();
-    $this->shortName = $communityModel->getShortName();
-    $this->namespace = $communityModel->getNamespaceName();
-    $this->srcFolder = pathinfo((string) $communityModel->getFileName(), PATHINFO_DIRNAME);
-    $this->translationContext = 'hubleto-app-community-contacts-loader';
-    $this->translationContextInner = 'Models\\Contact';
+    $this->behaveAsCommunityModel(CommunityContact::class, 'hubleto-app-community-contacts-loader');
 
     // Hubleto describes the columns in its constructor, before the name is reset; custom columns depend on it.
     $this->columns = $this->describeColumns();

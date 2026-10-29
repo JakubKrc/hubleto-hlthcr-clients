@@ -54,10 +54,9 @@ class EmailExport extends \Hubleto\Erp\Core
     $isRoleOption = str_starts_with($option, self::OPTION_ROLE_PREFIX);
     if ($isRoleOption) {
       $roleKey = substr($option, strlen(self::OPTION_ROLE_PREFIX));
-      $idRole = $this->getService(Roles::class)->getRoleId($roleKey);
-      $usersQuery = $usersQuery->whereIn('id', function ($userIdsWithRole) use ($idRole) {
-        $userIdsWithRole->select('id_user')->from('user_has_roles')->where('id_role', $idRole);
-      });
+      /** @var Roles */
+      $roles = $this->getService(Roles::class);
+      $usersQuery = $usersQuery->whereIn('id', $roles->userIdsWithRole($roleKey));
     } else if ($option != self::OPTION_ALL_USERS) {
       return [];
     }

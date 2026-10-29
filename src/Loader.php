@@ -22,7 +22,6 @@ class Loader extends \Hubleto\App\External\WaiBlue\HlthcrCore\HlthcrApp
 
   public function init(): void
   {
-    \Hubleto\App\External\WaiBlue\HlthcrCore\Services\Translator::register();
     parent::init();
 
     $this->router()->get([
@@ -51,8 +50,6 @@ class Loader extends \Hubleto\App\External\WaiBlue\HlthcrCore\HlthcrApp
 
   public function installApp(int $round): void
   {
-    \Hubleto\App\External\WaiBlue\HlthcrCore\Services\Translator::register();
-
     if ($round == 1) {
       $this->getModel(Models\ClientType::class)->upgradeSchema();
       // "php hubleto app install" runs only round 1, so foreign keys are created here too (Hubleto skips them later).

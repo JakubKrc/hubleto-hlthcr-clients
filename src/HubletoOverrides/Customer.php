@@ -10,6 +10,7 @@ use Hubleto\App\Community\Customers\Models\Customer as CommunityCustomer;
  */
 class Customer extends CommunityCustomer
 {
+  use \Hubleto\App\External\WaiBlue\HlthcrCore\Models\Traits\BehavesAsCommunityModel;
   use \Hubleto\App\External\WaiBlue\HlthcrCore\Models\Traits\OffersOnlyAllowedChanges;
   use \Hubleto\App\External\WaiBlue\HlthcrCore\Models\Traits\UsesStoredValues;
 
@@ -24,14 +25,7 @@ class Customer extends CommunityCustomer
   {
     parent::__construct();
 
-    // Behave as the community model everywhere else: same migrations, config keys and translations.
-    $communityModel = new \ReflectionClass(CommunityCustomer::class);
-    $this->fullName = $communityModel->getName();
-    $this->shortName = $communityModel->getShortName();
-    $this->namespace = $communityModel->getNamespaceName();
-    $this->srcFolder = pathinfo((string) $communityModel->getFileName(), PATHINFO_DIRNAME);
-    $this->translationContext = 'hubleto-app-community-customers-loader';
-    $this->translationContextInner = 'Models\\Customer';
+    $this->behaveAsCommunityModel(CommunityCustomer::class, 'hubleto-app-community-customers-loader');
 
     // Hubleto describes the columns in its constructor, before the name is reset; custom columns depend on it.
     $this->columns = $this->describeColumns();
