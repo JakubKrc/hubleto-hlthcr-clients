@@ -11,6 +11,7 @@ use Hubleto\App\Community\Customers\Models\Customer as CommunityCustomer;
 class Customer extends CommunityCustomer
 {
   use \Hubleto\App\External\WaiBlue\HlthcrCore\Models\Traits\OffersOnlyAllowedChanges;
+  use \Hubleto\App\External\WaiBlue\HlthcrCore\Models\Traits\UsesStoredValues;
 
   public string $recordManagerClass = CustomerRecordManager::class;
 
@@ -49,6 +50,8 @@ class Customer extends CommunityCustomer
   public function onBeforeUpdate(array $record): array
   {
     $record = parent::onBeforeUpdate($record);
+    // A save that leaves out a number column would store 0 for it (Hubleto), so the stored value is used.
+    $record = $this->addStoredValuesOfMissingColumns($record, self::NOT_NEGATIVE_COLUMNS);
     $this->refuseNegativeValues($record);
     return $record;
   }
