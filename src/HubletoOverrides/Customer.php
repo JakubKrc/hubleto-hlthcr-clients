@@ -14,6 +14,7 @@ class Customer extends CommunityCustomer
   use \Hubleto\App\External\WaiBlue\HlthcrCore\Models\Traits\OffersOnlyAllowedChanges;
   use \Hubleto\App\External\WaiBlue\HlthcrCore\Models\Traits\UsesStoredValues;
   use \Hubleto\App\External\WaiBlue\HlthcrCore\Models\Traits\EmptyDatesAsNull;
+  use \Hubleto\App\External\WaiBlue\HlthcrCore\Models\Traits\UsesCommunityCustomColumns;
 
   public string $recordManagerClass = CustomerRecordManager::class;
 
@@ -84,23 +85,10 @@ class Customer extends CommunityCustomer
     }
   }
 
-  // Hubleto reads custom columns by the class in use; HlthcrClients stores them for the community model.
+  // HlthcrClients stores its custom columns for the community model.
   public function describeColumns(): array
   {
-    $columns = parent::describeColumns();
-    $customColumns = $this->config()->forModel(CommunityCustomer::class)->getAsJson('customColumns');
-
-    foreach ($customColumns as $columnName => $columnDefinition) {
-      if (!is_array($columnDefinition)) continue;
-      $columnClass = 'Hubleto\\Framework\\Db\\Column\\' . ($columnDefinition['class'] ?? '');
-      if (!class_exists($columnClass)) continue;
-
-      $columns[$columnName] = (new $columnClass($this, $columnDefinition['title'] ?? ''))
-        ->fromArray($columnDefinition)
-        ->setProperty('isCustom', true)
-        ->setDefaultVisible()
-      ;
-    }
+    $columns = $this->addCommunityCustomColumns(parent::describeColumns(), CommunityCustomer::class);
 
     // The client list of both legacy apps shows the street, not the notes, the audit interval or the contract start.
     if (isset($columns['street_line_1'])) $columns['street_line_1']->setDefaultVisible();
