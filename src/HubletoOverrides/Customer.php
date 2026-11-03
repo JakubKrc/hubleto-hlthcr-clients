@@ -13,6 +13,7 @@ class Customer extends CommunityCustomer
   use \Hubleto\App\External\WaiBlue\HlthcrCore\Models\Traits\BehavesAsCommunityModel;
   use \Hubleto\App\External\WaiBlue\HlthcrCore\Models\Traits\OffersOnlyAllowedChanges;
   use \Hubleto\App\External\WaiBlue\HlthcrCore\Models\Traits\UsesStoredValues;
+  use \Hubleto\App\External\WaiBlue\HlthcrCore\Models\Traits\EmptyDatesAsNull;
 
   public string $recordManagerClass = CustomerRecordManager::class;
 
@@ -40,20 +41,36 @@ class Customer extends CommunityCustomer
   // Counts and intervals of the occupational health columns cannot be negative.
   const NOT_NEGATIVE_COLUMNS = ['hlthcr_employee_count', 'hlthcr_employee_count_at_risk', 'hlthcr_audit_interval_months'];
 
+  const CONTRACT_DATE_COLUMNS = ['hlthcr_contract_valid_from', 'hlthcr_contract_valid_to'];
+
   public function onBeforeCreate(array $record): array
   {
     $record = parent::onBeforeCreate($record);
+    $record = $this->emptyDatesAsNull($record);
     $this->refuseNegativeValues($record);
+    $this->refuseContractEndingBeforeStart($record);
     return $record;
   }
 
   public function onBeforeUpdate(array $record): array
   {
     $record = parent::onBeforeUpdate($record);
+    $record = $this->emptyDatesAsNull($record);
     // A save that leaves out a number column would store 0 for it (Hubleto), so the stored value is used.
-    $record = $this->addStoredValuesOfMissingColumns($record, self::NOT_NEGATIVE_COLUMNS);
+    $record = $this->addStoredValuesOfMissingColumns($record, array_merge(self::NOT_NEGATIVE_COLUMNS, self::CONTRACT_DATE_COLUMNS));
     $this->refuseNegativeValues($record);
+    $this->refuseContractEndingBeforeStart($record);
     return $record;
+  }
+
+  private function refuseContractEndingBeforeStart(array $record): void
+  {
+    $validFrom = (string) ($record['hlthcr_contract_valid_from'] ?? '');
+    $validTo = (string) ($record['hlthcr_contract_valid_to'] ?? '');
+    $hasBothDates = $validFrom != '' && $validTo != '';
+    if ($hasBothDates && $validTo < $validFrom) {
+      throw new \Hubleto\Framework\Exceptions\RecordSaveException($this->translate('The contract cannot end before it starts.'));
+    }
   }
 
   private function refuseNegativeValues(array $record): void
@@ -85,10 +102,11 @@ class Customer extends CommunityCustomer
       ;
     }
 
-    // The client list of both legacy apps shows the street, not the notes or the audit interval.
+    // The client list of both legacy apps shows the street, not the notes, the audit interval or the contract start.
     if (isset($columns['street_line_1'])) $columns['street_line_1']->setDefaultVisible();
     if (isset($columns['note'])) $columns['note']->setDefaultHidden();
     if (isset($columns['hlthcr_audit_interval_months'])) $columns['hlthcr_audit_interval_months']->setDefaultHidden();
+    if (isset($columns['hlthcr_contract_valid_from'])) $columns['hlthcr_contract_valid_from']->setDefaultHidden();
 
     return $columns;
   }

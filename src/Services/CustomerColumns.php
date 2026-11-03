@@ -28,6 +28,8 @@ class CustomerColumns extends \Hubleto\Erp\Core
       'hlthcr_employee_count' => 'int(8) NULL DEFAULT NULL',
       'hlthcr_employee_count_at_risk' => 'int(8) NULL DEFAULT NULL',
       'hlthcr_audit_interval_months' => 'int(8) NULL DEFAULT NULL',
+      'hlthcr_contract_valid_from' => 'date NULL DEFAULT NULL',
+      'hlthcr_contract_valid_to' => 'date NULL DEFAULT NULL',
     ];
   }
 
@@ -61,6 +63,17 @@ class CustomerColumns extends \Hubleto\Erp\Core
         // Column::fromArray() checks "description" but reads "hint".
         'description' => $this->getAuditIntervalHint(),
         'hint' => $this->getAuditIntervalHint(),
+      ],
+      // Both legacy apps keep the contract dates (one in a contract table, the other on the client).
+      'hlthcr_contract_valid_from' => [
+        'class' => 'Date',
+        'title' => $this->translate('Contract valid from'),
+      ],
+      'hlthcr_contract_valid_to' => [
+        'class' => 'Date',
+        'title' => $this->translate('Contract valid to'),
+        'description' => $this->translate('Empty: indefinite.'),
+        'hint' => $this->translate('Empty: indefinite.'),
       ],
     ];
   }

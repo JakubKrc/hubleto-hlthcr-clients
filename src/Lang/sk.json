@@ -13,7 +13,10 @@
         "Audit interval": "Interval auditov",
         "months": "mesiacov",
         "Empty: the default of {{ months }} months.": "Prázdne: predvolených {{ months }} mesiacov.",
-        "Number of employees at risk": "Počet zamestnancov v riziku"
+        "Number of employees at risk": "Počet zamestnancov v riziku",
+        "Contract valid from": "Zmluva platná od",
+        "Contract valid to": "Zmluva platná do",
+        "Empty: indefinite.": "Prázdne: na neurčito."
     },
     "Controllers\\Home": {
         "Clients": "Klienti",

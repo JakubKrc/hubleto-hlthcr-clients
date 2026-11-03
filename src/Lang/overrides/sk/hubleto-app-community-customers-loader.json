@@ -5,7 +5,8 @@
         "The numbers of employees and the audit interval cannot be negative.": "Počty zamestnancov a interval auditov nemôžu byť záporné.",
         "Customers": "Klienti",
         "Add Customer": "Pridať klienta",
-        "Customer": "Klient"
+        "Customer": "Klient",
+        "The contract cannot end before it starts.": "Zmluva nemôže skončiť skôr, ako začne."
     },
     "manifest": {
         "Customers": "Klienti"

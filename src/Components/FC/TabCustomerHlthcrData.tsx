@@ -9,6 +9,8 @@ const TabCustomerHlthcrData = () => <div className='grid grid-cols-1 md:grid-col
   <Input field='hlthcr_employee_count' />
   <Input field='hlthcr_employee_count_at_risk' />
   <Input field='hlthcr_audit_interval_months' />
+  <Input field='hlthcr_contract_valid_from' />
+  <Input field='hlthcr_contract_valid_to' />
 </div>;
 
 export default TabCustomerHlthcrData;
